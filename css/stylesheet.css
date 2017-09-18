@@ -1,0 +1,61 @@
+body {
+	color: #000;
+	font-family:Monospace;
+	font-size:13px;
+	text-align:center;
+	font-weight: bold;
+
+	background-color: #fff;
+	margin: 0px;
+	overflow: hidden;
+	cursor: pointer;
+	-moz-user-select: none; -webkit-user-select: none; -ms-user-select:none; user-select:none;-o-user-select:none;
+}
+
+#info {
+	position: absolute;
+	top: 20px;
+	right:0%;
+	width:100%;
+	text-align: center;
+	z-index: 100;
+	color:white;
+	display:block;
+}
+#controls {
+	position: absolute;
+	bottom: 20px;
+	right:20px;
+	text-align: center;
+	z-index: 100;
+	color:white;
+	display:block;
+}
+#buttons {
+	display: inline-block;
+	padding:0px 10px;
+	height:40px;
+	line-height: 40px;
+	background: rgba(255,255,255,0.5);
+	text-align: center;
+	text-transform: uppercase;
+	border-radius: 8px;
+}
+#buttons:hover{
+	background: rgba(50,50,50,0.5);
+}
+#buttons.clicked{
+	background: rgba(135,206,255,0.5);;
+	color:black;
+}
+#gui {
+	position: absolute;
+	top:40%;
+	right:25%;
+	width: 50%;
+	height:20%;
+	background: rgba(255,255,255,0.8);
+	text-align: center;
+	visibility: hidden;
+	font-family: Comic
+}
