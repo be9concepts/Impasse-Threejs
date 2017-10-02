@@ -76,6 +76,7 @@ function init() {
 	controls = new THREE.OrbitControls( camera, renderer.domElement );
 	controls.enableDamping = true;
 	controls.dampingFactor = 0.25;
+	controls.autoRotate = true;
 	controls.enableKeys = false;
 	controls.minPolarAngle = (Math.PI*13.75)/180
 	controls.maxPolarAngle = (Math.PI*90)/180
@@ -90,18 +91,6 @@ function init() {
 	document.addEventListener( 'keydown', onKeyDown );
 	document.addEventListener( 'resize', onWindowResize );
 }
-var client = {};
-
-// GUI
-client.gui = {
-	visible:false,
-	element:null,
-	toggle:function(element){
-		this.visible = !this.visible;
-		if (!this.visible) document.getElementById(element).style.visibility='hidden';
-		else document.getElementById(element).style.visibility='visible';
-	}
-}
 function onKeyDown ( event ) {
 	if (event.key == '1'){
 		controls.autoRotate=!controls.autoRotate;
@@ -111,7 +100,7 @@ function onKeyDown ( event ) {
 	
 
 		event.preventDefault();
-		var direction = '';
+		var direction = null;
 
 		if (event.keyCode === 187){ // +
 			current_map++;
@@ -122,16 +111,16 @@ function onKeyDown ( event ) {
 			loadMap(current_map);
 		}
 
-		if (event.keyCode === 87){ //w
+		if (event.keyCode === 87 || event.keyCode === 38){ //w
 			direction = 'forward'
 		}	
-		if (event.keyCode === 83){ //s
+		if (event.keyCode === 83 || event.keyCode === 40){ //s
 			direction = 'reverse'
 		}	
-		if (event.keyCode === 65){ //a
+		if (event.keyCode === 65 || event.keyCode === 37){ //a
 			direction = 'right'
 		}	
-		if (event.keyCode === 68){ //d
+		if (event.keyCode === 68 || event.keyCode === 39){ //d
 			direction = 'left';
 		}
 		move(player, direction)
@@ -213,6 +202,10 @@ function move(object, direction){
 	if (direction == 'right'){
 		object.dir.z = -1;
 	}
+	if (direction != null){
+		moveSound.play();
+		controls.autoRotate = false;
+	}
 
 	object.origin.coords = {
 		x:object.coords.x,
@@ -252,6 +245,9 @@ function checkCollisions(){
 						collision = true;
 						hitSound.play()
 					}
+					else {
+
+					}
 					
 				}
 			}
@@ -263,7 +259,7 @@ function checkCollisions(){
 		loadMap(current_map);
 	}
 	else {
-		moveSound.play();
+
 	}
 }
 
